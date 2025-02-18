@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar - Sound7ocke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/buscar.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><a href="/HTML/index.html">SOUND7OCKE</a></div>
+            <div class="nav">
+                <a href="/HTML/upload.html"><button class="nav-button buscar">Upload</button></a>
+                <a href="/HTML/buscar_musica.html"><button class="nav-button">Buscar</button></a>
+            </div>
+        </header>
+
+        <div class="title">
+            <h1>PESQUISAR</h1>
+        </div>
+
+        <div class="div_button">
+            <button class="button" onclick="buscarMusicas()">Músicas</button>
+            <button class="button" onclick="buscarArtistas()">Artistas</button>
+        </div>
+
+        <div class="div_resultado"></div>
+
+        <footer>
+            <p>Todos os direitos reservados © 2024</p>
+        </footer>
+    </div>
+    <script>
+        function buscarMusicas() {
+            // Realiza a requisição à API para buscar músicas
+            fetch('api/func1/index.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Limpa a div antes de adicionar os novos resultados
+                    const resultadoDiv = document.querySelector('.div_resultado');
+                    resultadoDiv.innerHTML = '';
+    
+                    if (data.length > 0) {
+                        data.forEach(musica => {
+                            const musicaDiv = document.createElement('div');
+                            musicaDiv.className = 'musica-item';
+                            musicaDiv.innerHTML = `
+                                <h3>${musica.nome_musica}</h3>
+                                <audio controls>
+                                    <source src="${musica.mp3}" type="audio/mpeg">
+                                    Seu navegador não suporta o elemento de áudio.
+                                </audio>
+                            `;
+                            resultadoDiv.appendChild(musicaDiv);
+                        });
+                    } else {
+                        resultadoDiv.innerHTML = '<p>Nenhuma música encontrada.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar músicas:', error);
+                    document.querySelector('.div_resultado').innerHTML = `<p>Ocorreu um erro ao buscar as músicas: ${error.message}</p>`;
+                });
+        }
+    
+        function buscarArtistas() {
+            // Realiza a requisição à API para buscar artistas
+            fetch('api/func1/index.php?type=artistas')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Limpa a div antes de adicionar os novos resultados
+                    const resultadoDiv = document.querySelector('.div_resultado');
+                    resultadoDiv.innerHTML = '';
+    
+                    if (data.length > 0) {
+                        data.forEach(artista => {
+                            const artistaDiv = document.createElement('div');
+                            artistaDiv.className = 'artista-item';
+                            artistaDiv.innerHTML = `
+                                <h3>${artista.nome}</h3>
+                            `;
+                            resultadoDiv.appendChild(artistaDiv);
+                        });
+                    } else {
+                        resultadoDiv.innerHTML = '<p>Nenhum artista encontrado.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar artistas:', error);
+                    document.querySelector('.div_resultado').innerHTML = `<p>Ocorreu um erro ao buscar os artistas: ${error.message}</p>`;
+                });
+        }
+    </script>
+</body>
+</html>

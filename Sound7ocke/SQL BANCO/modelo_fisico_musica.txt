@@ -1,0 +1,46 @@
+-- Criação da tabela Artistas
+CREATE TABLE Artistas (
+    pk_id_artista INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    quantidade_musicas INT
+);
+
+-- Criação da tabela Estilo
+CREATE TABLE Estilo (
+    pk_id_estilo INT AUTO_INCREMENT PRIMARY KEY,
+    estilo VARCHAR(100)
+);
+
+-- Criação da tabela Músicas
+CREATE TABLE Musicas (
+    pk_id_musica INT AUTO_INCREMENT PRIMARY KEY,
+    nome_musica VARCHAR(100),
+    genero VARCHAR(50),
+    mp3 VARCHAR(100),
+    fk_id_artista INT,
+    fk_id_estilo INT,
+    FOREIGN KEY (fk_id_artista) REFERENCES Artistas(pk_id_artista),
+    FOREIGN KEY (fk_id_estilo) REFERENCES Estilo(pk_id_estilo)
+);
+
+-- Criação da tabela Top 10
+CREATE TABLE Top_10 (
+    pk_id_top10 INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_artista INT,
+    fk_id_musica INT,
+    posicao INT,
+    FOREIGN KEY (fk_id_artista) REFERENCES Artistas(pk_id_artista),
+    FOREIGN KEY (fk_id_musica) REFERENCES Musicas(pk_id_musica)
+);
+
+-- Criação da tabela Arquivo_musica
+CREATE TABLE Arquivo_musica (
+    pk_id_arquivo INT AUTO_INCREMENT PRIMARY KEY,
+    fk_id_artista INT,
+    fk_id_musica INT,
+    fk_id_top10 INT,
+    arquivo VARCHAR(100),
+    FOREIGN KEY (fk_id_artista) REFERENCES Artistas(pk_id_artista),
+    FOREIGN KEY (fk_id_musica) REFERENCES Musicas(pk_id_musica),
+    FOREIGN KEY (fk_id_top10) REFERENCES Top_10(pk_id_top10)
+);

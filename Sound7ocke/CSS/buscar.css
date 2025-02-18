@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('/imgs/back_buscar.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to bottom,  rgba(2, 16, 36, 0.8),  rgba(2, 16, 36, 0.8),  rgba(205, 213, 219, 0));
+    
+}
+
+.logo {
+    font-size: 28px;
+    color: #ffffff;
+    font-weight: 700;
+    font-style: italic;
+    margin-left: 3%;
+
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-10px);
+}
+
+.nav {
+    display: flex;
+    margin-right: 1%;
+}
+
+.nav-button {
+    background-color: #3D155F;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-button.buscar {
+    background-color: #7C4DFF;
+}
+
+.nav-button:hover {
+    background-color: #5B2B7A;
+}
+
+.title {
+    margin: auto;
+    margin-top: 3%;
+    text-align: center;
+}
+
+.div_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.button {
+    background-color: #16417d;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #4b8cd0;
+}
+
+.div_resultado {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2%;
+    background-color: #4f4d58f1;
+    color: white;
+
+    border-radius: 2%;
+    width: 800px;
+    height: 400px;
+
+    backdrop-filter: blur(3px); /* Ajuste o valor conforme necessário */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+}
+
+
+h1 {
+    color: #ffffff;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 40px;
+    font-style: normal;
+}
+
+a {
+    font-style: none;
+    color: white;
+    text-decoration: none;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: black;
+}

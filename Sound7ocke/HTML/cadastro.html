@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registre-se - Sound7ocke</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/CSS/cadastro.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><a href="/HTML/index.html">SOUND7OCKE</a></div>
+            <div class="nav">
+                <a href="/HTML/login.html"><button class="nav-button">Login</button></a>
+                <a href="/HTML/cadastro.html"><button class="nav-button register">Cadastrar-se</button></a>
+            </div>
+        </header>
+
+        <div class="cad-box">
+            <h1>CADASTRAR-SE</h1>
+            <form id="cadastro">
+                <input type="text" placeholder="Usuário" class="input-field" id="nome" required>
+                <input type="email" placeholder="Seuemail@gmail.com" class="input-field" required>
+                <input type="password" placeholder="Senha" class="input-field" id="senha" required>
+                <input type="password" placeholder="Confirme sua senha" class="input-field" id="senha_confirm" required>
+    
+                <div>
+                    <input type="checkbox" id="terms" class="input-checkbox" required>
+                    <label for="terms">Concordo com os termos e condições</label>
+                </div><br>
+    
+                <button type="submit" class="login-button">Cadastrar</button>
+            </form>
+        </div>
+
+        <footer>
+            <p>Todos os direitos resevados © 2024</p>
+        </footer>
+    </div>
+
+    <script src="password_check.js"></script>
+    <script>
+        let passwordChecker;
+
+        createPasswordChecker().then(function(module) {
+            passwordChecker = module;
+
+            document.getElementById('cadastro').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const nome = document.getElementById("nome").value;
+                const senha = document.getElementById("senha").value;
+                const senha2 = document.getElementById("senha_confirm").value;
+
+                // Utiliza o ccall para chamar a função de verificação de senha
+                const isValid = passwordChecker.ccall('is_password_valid', 'number', ['string'], [senha]) === 1;
+
+                if (!isValid) {
+                    alert('A senha deve ter pelo menos 8 caracteres.');
+                    return;
+                }
+
+                if (senha === senha2) {
+                    localStorage.setItem('nome', nome);
+                    localStorage.setItem('senha', senha);
+                    window.location.href = 'login.html';
+                } else {
+                    alert('As senhas não são iguais. Tente novamente.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

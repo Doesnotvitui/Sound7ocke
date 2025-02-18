@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Sound7ocke</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/upload.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><a href="/HTML/index.html">SOUND7OCKE</a></div>
+            <div class="nav">
+                <a href="/HTML/buscar_musica.html"><button class="nav-button buscar">Buscar</button></a>
+                <a href="/HTML/upload.html"><button class="nav-button">Upload</button></a>
+            </div>
+        </header>
+
+        <form id="musicaForm" enctype="multipart/form-data">
+            <div class="super_div_input">
+                <div class="title">
+                    <h1>UPLOAD DE MUSICAS</h1>
+                </div>
+    
+                <div class="sub">
+                    <div class="div_input">
+                        <input type="text" placeholder="Nome do Artista" class="input-field" name="nome_artista" required>
+                        <input type="file" id="fileInput" class="input-field file" required name="arquivo" accept="audio/*">
+                    </div>
+                    <div class="div_input">
+                        <input type="text" placeholder="Estilo" class="input-field" name="estilo" required>
+                        <input type="text" placeholder="Nome da Música" class="input-field" name="nome_musica" required>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="div_button">
+                <button type="submit" class="button" id="botao">Upload</button>
+            </div>
+        </form>
+
+        <footer>
+            <p>Todos os direitos reservados © 2024</p>
+        </footer>
+
+        <script>
+            document.getElementById('musicaForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Impede o envio padrão do formulário
+                var formData = new FormData(this);
+    
+                fetch('upload_api.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    document.getElementById('musicaForm').reset(); // Limpa o formulário após o envio
+                })
+                .catch(error => console.error('Erro:', error));
+            });
+        </script>
+    </div>
+</body>
+</html>

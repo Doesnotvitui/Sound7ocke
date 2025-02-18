@@ -1,0 +1,14 @@
+SIGA OS PASSOS UM DE CADA VEZ-----------------------------------------------------------------------------
+
+1) RODE O CODIGO SQL QUE ESTA NO ARQUIVO TXT DA PASTA "SQL BANCO"
+
+2) VERIFIQUE SE TODOS OS ARQUIVOS ESTÃO NA PASTA HTDOCS, CASO NÃO ESTEJA MOVA-OS PARA LÁ
+
+3) DIGITE ESTE CAMINHO NO SEU BROWSER PREFERIDO: localhost/HTML
+
+
+
+CASO QUEIRA COMPILAR---------------------------------------------------------------------
+1) COMPILE O CODIGO EM C USANDO ESTE COMANDO DO EMSCRIPTEN:
+
+emcc password_check.c -o HTML\password_check.js -s MODULARIZE=1 -s EXPORT_NAME="createPasswordChecker" -s EXPORTED_FUNCTIONS="['_is_password_valid']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']"
